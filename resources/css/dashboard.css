@@ -1,0 +1,74 @@
+.dashboard-manage-button {
+    border: none;
+    border-radius: 9px;
+    background: #9182BD;
+}
+
+.dashboard-activity-chart {
+    height: 175px;
+    gap: 15px;
+}
+
+.dashboard-activity-track {
+    height: 140px;
+}
+
+.dashboard-activity-bar {
+    width: 28px;
+    max-width: 100%;
+    height: var(--activity-height);
+    border-radius: 20px 20px 8px 8px;
+    background: var(--activity-color);
+}
+
+.dashboard-progress-ring {
+    display: flex;
+    width: 155px;
+    height: 155px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: conic-gradient(
+        #9182BD var(--progress),
+        #EAE6F5 var(--progress)
+    );
+}
+
+.dashboard-progress-center {
+    display: flex;
+    width: 125px;
+    height: 125px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.dashboard-progress-value,
+.dashboard-task-title,
+.dashboard-activity-time,
+.dashboard-activity-title {
+    font-size: 13px;
+}
+
+.dashboard-progress-value {
+    color: #373247;
+    font-size: 28px;
+}
+
+.dashboard-progress-complete {
+    color: #9182BD;
+}
+
+.dashboard-progress-remaining {
+    color: #EAE6F5;
+}
+
+.dashboard-list-link {
+    color: #9182BD;
+}
+
+.dashboard-activity-time {
+    min-width: 65px;
+}

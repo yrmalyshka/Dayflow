@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,10 +69,6 @@
             z-index: 1000;
         }
 
-        .calendar-page {
-            margin-left: 250px;
-        }
-
         .sidebar-brand-row {
             display: flex;
             align-items: center;
@@ -140,10 +135,6 @@
         }
 
         body.sidebar-collapsed .main-content {
-            margin-left: 78px;
-        }
-
-        body.sidebar-collapsed .calendar-page {
             margin-left: 78px;
         }
 
@@ -409,12 +400,7 @@
                 padding: 22px 16px;
             }
 
-            .calendar-page {
-                margin-left: 0;
-            }
-
-            body.sidebar-collapsed .main-content,
-            body.sidebar-collapsed .calendar-page {
+            body.sidebar-collapsed .main-content {
                 margin-left: 0;
             }
         }

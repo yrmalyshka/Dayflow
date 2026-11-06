@@ -69,8 +69,8 @@ class PageController extends Controller
                 'category' => 'Work',
                 'priority' => 'High',
                 'status' => 'In Progress',
-                'date' => '2026-11-04',
-                'time' => '07:00',
+                'date' => '2026-11-06',
+                'time' => '19:00',
             ],
         ];
     }

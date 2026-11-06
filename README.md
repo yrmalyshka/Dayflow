@@ -20,9 +20,11 @@ Halaman login merupakan halaman awal bagi pengguna untuk memasukkan username seb
 
 ### 2. Dashboard
 <!-- Simpan screenshot dashboard dengan nama dashboard.png di folder screenshots -->
-![Dashboard](screenshots/dashboard.png)
+![Dashboard Desktop](screenshots/dashboard.png)
 
-Dashboard menampilkan ringkasan produktivitas pengguna, meliputi jumlah seluruh tugas, tugas yang sedang dikerjakan, tugas yang telah selesai, dan tugas yang masih tertunda.
+![Dashboard Mobile](screenshots/mobile.png)
+
+Dashboard menampilkan ringkasan produktivitas pengguna, meliputi jumlah seluruh tugas, tugas yang sedang dikerjakan, tugas yang telah selesai, dan tugas yang masih tertunda. Tampilan dashboard menggunakan partial Blade untuk kartu ringkasan dan baris tugas, sementara style khususnya disimpan di `resources/css/dashboard.css`.
 
 Selain itu, terdapat visualisasi aktivitas mingguan, persentase penyelesaian tugas, daftar tugas prioritas, serta aktivitas yang dijadwalkan pada hari ini.
 
@@ -36,7 +38,7 @@ Halaman Task Management digunakan untuk melihat dan mengelola daftar aktivitas. 
 <!-- Simpan screenshot calendar dengan nama calendar.png di folder screenshots -->
 ![Calendar](screenshots/calendar.png)
 
-Halaman Calendar menyediakan tampilan kalender untuk membantu pengguna melihat jadwal dan aktivitas berdasarkan tanggal.
+Halaman Calendar menyediakan tampilan bulanan, mingguan, dan harian untuk membantu pengguna melihat jadwal dan aktivitas berdasarkan tanggal. Style dan logika kalender dipisahkan ke `resources/css/calendar.css` dan `resources/js/calendar.js`.
 
 ### 5. Profile
 <!-- Simpan screenshot profile dengan nama profile.png di folder screenshots -->
@@ -59,7 +61,7 @@ Dayflow menyediakan beberapa fitur utama untuk mendukung pengelolaan aktivitas s
 | Task Status | Menampilkan status To Do, In Progress, dan Completed. |
 | Weekly Activity | Menampilkan jumlah aktivitas berdasarkan hari dalam satu minggu. |
 | Overall Progress | Menampilkan persentase tugas yang telah diselesaikan. |
-| Calendar | Menampilkan jadwal dan aktivitas dalam bentuk kalender. |
+| Kalender | Menampilkan jadwal dalam tampilan bulan, minggu, dan hari, dengan filter kategori. |
 | Profile | Menampilkan informasi dan ringkasan produktivitas pengguna. |
 
 ---
@@ -76,8 +78,11 @@ Teknologi yang digunakan dalam pengembangan Dayflow:
 ### Frontend
 - **Blade Template** — Template engine Laravel untuk membangun tampilan halaman dinamis.
 - **Bootstrap 5** — Framework CSS untuk membangun layout dan komponen antarmuka.
-- **Custom CSS** — Mengatur tampilan visual dan identitas desain Dayflow.
-- **JavaScript** — Mendukung interaksi pada antarmuka aplikasi.
+- **Tailwind CSS 4** — Utility CSS yang diproses melalui Vite.
+- **Custom CSS** — Mengatur tampilan khusus dashboard dan kalender.
+- **JavaScript** — Mendukung interaksi kalender.
+- **FullCalendar 6** — Menampilkan dan mengatur tampilan jadwal kalender.
+- **Vite** — Memproses aset frontend.
 - **Bootstrap Icons** — Menyediakan ikon untuk berbagai komponen UI.
 - **Google Fonts (Inter)** — Digunakan sebagai tipografi utama.
 
@@ -125,25 +130,34 @@ Dayflow/
 ├── public/
 │
 ├── resources/
+│   ├── css/
+│   │   ├── app.css
+│   │   ├── calendar.css
+│   │   └── dashboard.css
+│   ├── js/
+│   │   ├── app.js
+│   │   └── calendar.js
 │   └── views/
 │       ├── components/
 │       │   ├── navbar.blade.php
 │       │   └── footer.blade.php
-│       │
 │       ├── layouts/
 │       │   └── app.blade.php
-│       │
 │       ├── partials/
+│       │   ├── dashboard/
+│       │   │   ├── summary-card.blade.php
+│       │   │   └── task-row.blade.php
 │       │   └── flash.blade.php
-│       │
-│       ├── login.blade.php
+│       ├── calender.blade.php
 │       ├── dashboard.blade.php
 │       ├── management.blade.php
-│       ├── calendar.blade.php
+│       ├── login.blade.php
 │       └── profile.blade.php
 │
 ├── routes/
 │   └── web.php
+├── vite.config.js
+├── package.json
 │
 ├── screenshots/
 │   ├── login.png
@@ -185,6 +199,12 @@ Install seluruh dependency Laravel menggunakan Composer:
 composer install
 ```
 
+Install dependency frontend:
+
+```bash
+npm install
+```
+
 ### 3. Configure Environment
 
 Salin file `.env.example` menjadi `.env`:
@@ -199,7 +219,21 @@ Generate application key:
 php artisan key:generate
 ```
 
-### 4. Run Application
+### 4. Build Frontend Assets
+
+Build aset untuk penggunaan lokal:
+
+```bash
+npm run build
+```
+
+Selama pengembangan, jalankan Vite dalam mode watch:
+
+```bash
+npm run dev
+```
+
+### 5. Run Application
 
 Jalankan development server Laravel:
 
@@ -227,6 +261,7 @@ Beberapa route utama yang digunakan dalam aplikasi Dayflow:
 | GET | `/dashboard` | Halaman dashboard |
 | GET | `/management` | Halaman task management |
 | GET | `/calendar` | Halaman kalender |
+| GET | `/api/calendar/events` | Mengambil event kalender untuk rentang tanggal tertentu |
 | GET | `/profile` | Halaman profil |
 | POST | `/logout` | Proses logout |
 
@@ -242,7 +277,7 @@ Dayflow dikembangkan menggunakan pola arsitektur **Model-View-Controller (MVC)**
 - **View:** Mengelola tampilan antarmuka menggunakan Blade Template dan Bootstrap.
 - **Controller:** Mengelola alur aplikasi, memproses request, mengolah data aktivitas, dan mengirimkan data ke halaman View.
 
-Pemisahan tersebut membantu menjaga struktur kode agar lebih terorganisasi dan mudah dikembangkan.
+Dashboard menggunakan partial Blade untuk komponen yang berulang. Style khusus dashboard dan kalender serta logika JavaScript kalender disimpan sebagai aset terpisah yang dikelola Vite. Pemisahan tersebut membantu menjaga struktur kode agar lebih terorganisasi dan mudah dikembangkan.
 
 ---
 
