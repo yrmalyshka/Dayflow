@@ -1,58 +1,276 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Dayflow — Daily Planner & Productivity Dashboard
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Plan your day, find your flow.**
 
-## About Laravel
+Dayflow adalah aplikasi web Daily Planner & Productivity Dashboard yang dirancang untuk membantu pengguna mengatur aktivitas harian, mengelola tugas, memantau progres pekerjaan, dan menyusun jadwal secara lebih terstruktur.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Aplikasi ini dikembangkan menggunakan framework Laravel dengan pendekatan Model-View-Controller (MVC), Blade Template, dan Bootstrap 5. Dayflow memiliki antarmuka yang sederhana, modern, dan responsif dengan dominasi warna lavender untuk memberikan pengalaman penggunaan yang nyaman.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Preview Website
 
-## Learning Laravel
+Berikut merupakan tampilan antarmuka aplikasi Dayflow.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 1. Login Page
+<!-- Simpan screenshot login dengan nama login.png di folder screenshots -->
+![Login Page](screenshots/login.png)
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Halaman login merupakan halaman awal bagi pengguna untuk memasukkan username sebelum mengakses dashboard Dayflow.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### 2. Dashboard
+<!-- Simpan screenshot dashboard dengan nama dashboard.png di folder screenshots -->
+![Dashboard](screenshots/dashboard.png)
 
-## Agentic Development
+Dashboard menampilkan ringkasan produktivitas pengguna, meliputi jumlah seluruh tugas, tugas yang sedang dikerjakan, tugas yang telah selesai, dan tugas yang masih tertunda.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Selain itu, terdapat visualisasi aktivitas mingguan, persentase penyelesaian tugas, daftar tugas prioritas, serta aktivitas yang dijadwalkan pada hari ini.
 
-```bash
-composer require laravel/boost --dev
+### 3. Task Management
+<!-- Simpan screenshot management dengan nama management.png di folder screenshots -->
+![Task Management](screenshots/management.png)
 
-php artisan boost:install
+Halaman Task Management digunakan untuk melihat dan mengelola daftar aktivitas. Pengguna dapat melihat informasi tugas berdasarkan judul, kategori, tanggal, prioritas, dan status pengerjaan.
+
+### 4. Calendar
+<!-- Simpan screenshot calendar dengan nama calendar.png di folder screenshots -->
+![Calendar](screenshots/calendar.png)
+
+Halaman Calendar menyediakan tampilan kalender untuk membantu pengguna melihat jadwal dan aktivitas berdasarkan tanggal.
+
+### 5. Profile
+<!-- Simpan screenshot profile dengan nama profile.png di folder screenshots -->
+![Profile](screenshots/profile.png)
+
+Halaman Profile menampilkan informasi pengguna dan ringkasan produktivitas berdasarkan aktivitas yang telah dikelola.
+
+---
+
+## Features
+
+Dayflow menyediakan beberapa fitur utama untuk mendukung pengelolaan aktivitas sehari-hari.
+
+| Fitur | Deskripsi |
+|---|---|
+| Login | Memasukkan username untuk mengakses aplikasi. |
+| Dashboard | Menampilkan ringkasan aktivitas dan produktivitas pengguna. |
+| Task Management | Menampilkan dan mengelola daftar tugas. |
+| Task Priority | Mengidentifikasi tugas dengan tingkat prioritas tinggi. |
+| Task Status | Menampilkan status To Do, In Progress, dan Completed. |
+| Weekly Activity | Menampilkan jumlah aktivitas berdasarkan hari dalam satu minggu. |
+| Overall Progress | Menampilkan persentase tugas yang telah diselesaikan. |
+| Calendar | Menampilkan jadwal dan aktivitas dalam bentuk kalender. |
+| Profile | Menampilkan informasi dan ringkasan produktivitas pengguna. |
+
+---
+
+## Tech Stack
+
+Teknologi yang digunakan dalam pengembangan Dayflow:
+
+### Backend
+- **PHP** — Bahasa pemrograman untuk mengembangkan logika aplikasi.
+- **Laravel 13** — Framework PHP yang digunakan untuk membangun aplikasi dengan arsitektur MVC.
+- **Composer** — Dependency manager untuk mengelola library PHP.
+
+### Frontend
+- **Blade Template** — Template engine Laravel untuk membangun tampilan halaman dinamis.
+- **Bootstrap 5** — Framework CSS untuk membangun layout dan komponen antarmuka.
+- **Custom CSS** — Mengatur tampilan visual dan identitas desain Dayflow.
+- **JavaScript** — Mendukung interaksi pada antarmuka aplikasi.
+- **Bootstrap Icons** — Menyediakan ikon untuk berbagai komponen UI.
+- **Google Fonts (Inter)** — Digunakan sebagai tipografi utama.
+
+### Tools
+- **Visual Studio Code** — Code editor.
+- **Laragon** — Local development environment.
+- **Git** — Version control system.
+- **GitHub** — Platform untuk menyimpan dan mengelola repository proyek.
+
+---
+
+## Design System
+
+Dayflow menggunakan pendekatan desain clean, minimal, dan modern dengan kombinasi warna lavender, putih, serta abu-abu.
+
+### Color Palette
+
+| Color | Hex Code | Usage |
+|---|---|---|
+| Primary | `#9182BD` | Primary button dan elemen utama |
+| Accent | `#C8BDE5` | Aksen dan highlight |
+| Background | `#F8F7FC` | Latar belakang halaman |
+| Surface | `#EAE6F5` | Elemen pendukung |
+| Text | `#373247` | Teks utama |
+
+### Typography
+- **Primary Font:** Inter
+- **Design Style:** Clean, Minimalist, Modern Dashboard
+- **Layout:** Responsive Web Design
+
+---
+
+## Project Structure
+
+Berikut struktur direktori utama proyek Dayflow:
+
+```text
+Dayflow/
+│
+├── app/
+│   └── Http/
+│       └── Controllers/
+│           └── PageController.php
+│
+├── public/
+│
+├── resources/
+│   └── views/
+│       ├── components/
+│       │   ├── navbar.blade.php
+│       │   └── footer.blade.php
+│       │
+│       ├── layouts/
+│       │   └── app.blade.php
+│       │
+│       ├── partials/
+│       │   └── flash.blade.php
+│       │
+│       ├── login.blade.php
+│       ├── dashboard.blade.php
+│       ├── management.blade.php
+│       ├── calendar.blade.php
+│       └── profile.blade.php
+│
+├── routes/
+│   └── web.php
+│
+├── screenshots/
+│   ├── login.png
+│   ├── dashboard.png
+│   ├── management.png
+│   ├── calendar.png
+│   └── profile.png
+│
+├── .env.example
+├── .gitignore
+├── artisan
+├── composer.json
+└── README.md
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## Installation & Setup
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Ikuti langkah-langkah berikut untuk menjalankan Dayflow secara lokal.
 
-## Code of Conduct
+### 1. Clone Repository
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+git clone https://github.com/USERNAME/Dayflow.git
+```
 
-## Security Vulnerabilities
+Masuk ke direktori proyek:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+cd Dayflow
+```
 
-## License
+### 2. Install Dependencies
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Install seluruh dependency Laravel menggunakan Composer:
+
+```bash
+composer install
+```
+
+### 3. Configure Environment
+
+Salin file `.env.example` menjadi `.env`:
+
+```bash
+copy .env.example .env
+```
+
+Generate application key:
+
+```bash
+php artisan key:generate
+```
+
+### 4. Run Application
+
+Jalankan development server Laravel:
+
+```bash
+php artisan serve
+```
+
+Buka aplikasi melalui browser:
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+## Application Routes
+
+Beberapa route utama yang digunakan dalam aplikasi Dayflow:
+
+| Method | URL | Description |
+|---|---|---|
+| GET | `/` | Halaman login |
+| GET | `/login` | Menampilkan halaman login |
+| POST | `/login` | Memproses login |
+| GET | `/dashboard` | Halaman dashboard |
+| GET | `/management` | Halaman task management |
+| GET | `/calendar` | Halaman kalender |
+| GET | `/profile` | Halaman profil |
+| POST | `/logout` | Proses logout |
+
+*Catatan: Route dapat menyesuaikan konfigurasi terbaru pada `routes/web.php`.*
+
+---
+
+## Application Architecture
+
+Dayflow dikembangkan menggunakan pola arsitektur **Model-View-Controller (MVC)** yang disediakan Laravel.
+
+- **Model:** Mengelola representasi data aplikasi. Pada versi prototipe ini, data aktivitas disimpan sementara menggunakan session.
+- **View:** Mengelola tampilan antarmuka menggunakan Blade Template dan Bootstrap.
+- **Controller:** Mengelola alur aplikasi, memproses request, mengolah data aktivitas, dan mengirimkan data ke halaman View.
+
+Pemisahan tersebut membantu menjaga struktur kode agar lebih terorganisasi dan mudah dikembangkan.
+
+---
+
+## Development Notes
+
+Dayflow merupakan proyek pengembangan aplikasi web untuk memenuhi kebutuhan pembelajaran dan penerapan konsep Laravel MVC.
+
+Beberapa fitur pada versi ini masih menggunakan data sementara berbasis session dan belum menggunakan database untuk penyimpanan permanen.
+
+Pengembangan selanjutnya dapat mencakup:
+- Implementasi autentikasi pengguna yang lebih lengkap.
+- Integrasi database untuk penyimpanan data tugas.
+- Pengembangan fitur CRUD secara menyeluruh.
+- Peningkatan fitur kalender dan sinkronisasi jadwal.
+- Pengembangan notifikasi dan pengingat aktivitas.
+
+---
+
+## Author
+
+**Developed by:** Yumi
+
+**Project:** Dayflow — Daily Planner & Productivity Dashboard
+
+**Framework:** Laravel 13
+
+**Repository:** [GitHub - Dayflow](https://github.com/yrmalyshka/Dayflow)
+
+---
+
+*Plan your day, find your flow.*

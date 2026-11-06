@@ -11,75 +11,58 @@ class PageController extends Controller
     // Data aktivitas sementara
     private function getTasks(): array
     {
-        if (! session()->has('tasks')) {
-            session(['tasks' => [
-                [
-                    'id' => 1,
-                    'title' => 'Finish UI/UX Assignment',
-                    'description' => 'Complete the mobile app interface design.',
-                    'category' => 'Study',
-                    'priority' => 'High',
-                    'status' => 'In Progress',
-                    'date' => '2026-11-03',
-                    'time' => '09:00',
-                ],
-                [
-                    'id' => 2,
-                    'title' => 'Team Project Meeting',
-                    'description' => 'Discuss project progress with the team.',
-                    'category' => 'Work',
-                    'priority' => 'Medium',
-                    'status' => 'To Do',
-                    'date' => '2026-11-03',
-                    'time' => '13:00',
-                ],
-                [
-                    'id' => 3,
-                    'title' => 'Read a Book',
-                    'description' => 'Read at least one chapter.',
-                    'category' => 'Personal',
-                    'priority' => 'Low',
-                    'status' => 'Completed',
-                    'date' => '2026-11-03',
-                    'time' => '16:00',
-                ],
-                [
-                    'id' => 4,
-                    'title' => 'Prepare Presentation',
-                    'description' => 'Prepare slides for the next presentation.',
-                    'category' => 'Study',
-                    'priority' => 'High',
-                    'status' => 'To Do',
-                    'date' => '2026-11-04',
-                    'time' => '10:00',
-                ],
-                [
-                    'id' => 5,
-                    'title' => 'Morning Workout',
-                    'description' => 'Do a 30-minute exercise session.',
-                    'category' => 'Personal',
-                    'priority' => 'Medium',
-                    'status' => 'Completed',
-                    'date' => '2026-11-04',
-                    'time' => '07:00',
-                ]]]);
-        }
-
-        $defaultTask = [
-            'description' => '',
-            'category' => 'Personal',
-            'priority' => 'Medium',
-            'status' => 'To Do',
-            'date' => now()->toDateString(),
-            'time' => '09:00',
+        return [
+            [
+                'id' => 1,
+                'title' => 'Finish UI/UX Assignment',
+                'description' => 'Complete the mobile app interface design.',
+                'category' => 'Study',
+                'priority' => 'High',
+                'status' => 'In Progress',
+                'date' => '2026-11-03',
+                'time' => '09:00',
+            ],
+            [
+                'id' => 2,
+                'title' => 'Team Project Meeting',
+                'description' => 'Discuss project progress with the team.',
+                'category' => 'Work',
+                'priority' => 'Medium',
+                'status' => 'To Do',
+                'date' => '2026-11-03',
+                'time' => '13:00',
+            ],
+            [
+                'id' => 3,
+                'title' => 'Read a Book',
+                'description' => 'Read at least one chapter.',
+                'category' => 'Personal',
+                'priority' => 'Low',
+                'status' => 'Completed',
+                'date' => '2026-11-03',
+                'time' => '16:00',
+            ],
+            [
+                'id' => 4,
+                'title' => 'Prepare Presentation',
+                'description' => 'Prepare slides for the next presentation.',
+                'category' => 'Study',
+                'priority' => 'High',
+                'status' => 'To Do',
+                'date' => '2026-11-04',
+                'time' => '10:00',
+            ],
+            [
+                'id' => 5,
+                'title' => 'Morning Workout',
+                'description' => 'Do a 30-minute exercise session.',
+                'category' => 'Personal',
+                'priority' => 'Medium',
+                'status' => 'Completed',
+                'date' => '2026-11-04',
+                'time' => '07:00',
+            ],
         ];
-        $tasks = collect(session('tasks'))
-            ->map(fn (array $task): array => array_replace($defaultTask, $task))
-            ->all();
-
-        session(['tasks' => $tasks]);
-
-        return $tasks;
     }
 
     // Halaman login
@@ -101,6 +84,7 @@ class PageController extends Controller
     }
 
     // Dashboard
+    // Dashboard
     public function dashboard(Request $request)
     {
         $username = $request->query('username');
@@ -111,10 +95,15 @@ class PageController extends Controller
 
         $tasks = $this->getTasks();
 
+        // Summary
         $totalTasks = count($tasks);
 
         $completedTasks = collect($tasks)
             ->where('status', 'Completed')
+            ->count();
+
+        $inProgressTasks = collect($tasks)
+            ->where('status', 'In Progress')
             ->count();
 
         $pendingTasks = $totalTasks - $completedTasks;
@@ -123,23 +112,51 @@ class PageController extends Controller
             ? round(($completedTasks / $totalTasks) * 100)
             : 0;
 
+        // Today's Activities
         $todayTasks = collect($tasks)
             ->where('date', now()->format('Y-m-d'))
             ->sortBy('time')
             ->values();
 
+        // Priority Tasks
         $priorityTasks = collect($tasks)
             ->where('priority', 'High')
+            ->where('status', '!=', 'Completed')
             ->values();
+
+        // Weekly Activity
+        $startOfWeek = now()->startOfWeek();
+
+        $weeklyActivity = [];
+
+        for ($i = 0; $i < 7; $i++) {
+            $date = $startOfWeek->copy()->addDays($i);
+
+            $weeklyActivity[] = [
+                'day' => $date->format('D'),
+                'count' => collect($tasks)
+                    ->where('date', $date->format('Y-m-d'))
+                    ->count(),
+            ];
+        }
+
+        $maxActivity = max(
+            1,
+            collect($weeklyActivity)->max('count')
+        );
 
         return view('dashboard', compact(
             'username',
+            'tasks',
             'totalTasks',
             'completedTasks',
+            'inProgressTasks',
             'pendingTasks',
             'progress',
             'todayTasks',
-            'priorityTasks'
+            'priorityTasks',
+            'weeklyActivity',
+            'maxActivity'
         ));
     }
 

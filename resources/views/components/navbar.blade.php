@@ -12,7 +12,7 @@
         class="mobile-nav-toggle"
         type="button"
         aria-label="Open navigation menu"
-        aria-controls="pr imary-navigation"
+        aria-controls="primary-navigation"
         aria-expanded="false"
     >
         <i class="bi bi-list" aria-hidden="true"></i>
@@ -139,6 +139,7 @@
         const mobileToggle = document.querySelector('.mobile-nav-toggle');
         const desktopToggle = document.querySelector('.desktop-nav-toggle');
         const sidebar = document.getElementById('primary-navigation');
+        const mobileViewport = window.matchMedia('(max-width: 991px)');
 
         if (!sidebar) {
             return;
@@ -181,6 +182,10 @@
             );
         });
 
+        mobileViewport.addEventListener('change', () => {
+            setMobileNavigationOpen(false);
+        });
+
         desktopToggle?.addEventListener('click', () => {
             setDesktopNavigationExpanded(
                 desktopToggle.getAttribute('aria-expanded') !== 'true'
@@ -192,10 +197,12 @@
         });
 
         document.addEventListener('click', event => {
+            const eventPath = event.composedPath();
+
             if (
                 mobileToggle?.getAttribute('aria-expanded') === 'true'
-                && !sidebar.contains(event.target)
-                && !mobileToggle.contains(event.target)
+                && !eventPath.includes(sidebar)
+                && !eventPath.includes(mobileToggle)
             ) {
                 setMobileNavigationOpen(false);
             }
