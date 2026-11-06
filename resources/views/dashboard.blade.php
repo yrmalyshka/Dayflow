@@ -25,26 +25,61 @@
     </div>
 
     <div class="row g-3 mb-4 summary-cards">
-        @include('partials.dashboard.summary-card', [
-            'label' => 'Total Tasks',
-            'value' => $totalTasks,
-            'icon' => 'bi-list-task',
-        ])
-        @include('partials.dashboard.summary-card', [
-            'label' => 'In Progress',
-            'value' => $inProgressTasks,
-            'icon' => 'bi-hourglass-split',
-        ])
-        @include('partials.dashboard.summary-card', [
-            'label' => 'Completed Tasks',
-            'value' => $completedTasks,
-            'icon' => 'bi-check-circle',
-        ])
-        @include('partials.dashboard.summary-card', [
-            'label' => 'Pending Tasks',
-            'value' => $pendingTasks,
-            'icon' => 'bi-clock-history',
-        ])
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card-custom">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="page-subtitle mb-2">Total Tasks</p>
+                        <div class="stat-number">{{ $totalTasks }}</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="bi bi-list-task"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card-custom">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="page-subtitle mb-2">In Progress</p>
+                        <div class="stat-number">{{ $inProgressTasks }}</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="bi bi-hourglass-split"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card-custom">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="page-subtitle mb-2">Completed Tasks</p>
+                        <div class="stat-number">{{ $completedTasks }}</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card-custom">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="page-subtitle mb-2">Pending Tasks</p>
+                        <div class="stat-number">{{ $pendingTasks }}</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="bi bi-clock-history"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row g-3 mb-4">
@@ -139,11 +174,19 @@
                     </div>
 
                     @forelse ($priorityTasks as $task)
-                        @include('partials.dashboard.task-row', [
-                            'task' => $task,
-                            'badgeLabel' => $task['priority'],
-                            'badgeClass' => 'badge-high',
-                        ])
+                        <div class="d-flex align-items-center justify-content-between py-2 border-bottom gap-2">
+                            <div class="me-2">
+                                <div class="fw-semibold dashboard-task-title">
+                                    {{ $task['title'] }}
+                                </div>
+                                <small class="text-secondary">
+                                    {{ $task['category'] }}
+                                </small>
+                            </div>
+                            <span class="badge-soft badge-high">
+                                {{ $task['priority'] }}
+                            </span>
+                        </div>
                     @empty
                         <p class="page-subtitle mb-0">
                             No priority tasks at the moment.
@@ -159,11 +202,19 @@
                         </div>
 
                         @forelse ($inProgressTaskList as $task)
-                            @include('partials.dashboard.task-row', [
-                                'task' => $task,
-                                'badgeLabel' => 'In Progress',
-                                'badgeClass' => 'badge-medium',
-                            ])
+                            <div class="d-flex align-items-center justify-content-between py-2 border-bottom gap-2">
+                                <div class="me-2">
+                                    <div class="fw-semibold dashboard-task-title">
+                                        {{ $task['title'] }}
+                                    </div>
+                                    <small class="text-secondary">
+                                        {{ $task['category'] }}
+                                    </small>
+                                </div>
+                                <span class="badge-soft badge-medium">
+                                    In Progress
+                                </span>
+                            </div>
                         @empty
                             <p class="page-subtitle mb-0">
                                 No tasks in progress right now.
@@ -178,11 +229,19 @@
                         </div>
 
                         @forelse ($toDoTaskList as $task)
-                            @include('partials.dashboard.task-row', [
-                                'task' => $task,
-                                'badgeLabel' => 'To Do',
-                                'badgeClass' => 'badge-low',
-                            ])
+                            <div class="d-flex align-items-center justify-content-between py-2 border-bottom gap-2">
+                                <div class="me-2">
+                                    <div class="fw-semibold dashboard-task-title">
+                                        {{ $task['title'] }}
+                                    </div>
+                                    <small class="text-secondary">
+                                        {{ $task['category'] }}
+                                    </small>
+                                </div>
+                                <span class="badge-soft badge-low">
+                                    To Do
+                                </span>
+                            </div>
                         @empty
                             <p class="page-subtitle mb-0">
                                 No tasks to do right now.

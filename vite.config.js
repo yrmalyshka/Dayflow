@@ -10,6 +10,8 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/css/dashboard.css',
+                'resources/css/management.css',
+                'resources/js/management.js',
                 'resources/css/calendar.css',
                 'resources/js/calendar.js',
             ],

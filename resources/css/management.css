@@ -1,0 +1,8 @@
+.management-search-icon {
+    border-color: var(--border);
+}
+
+.management-reset-button {
+    border-radius: 10px;
+    padding-block: 11px;
+}

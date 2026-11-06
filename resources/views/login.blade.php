@@ -11,7 +11,7 @@
 
         <div class="text-center mb-4">
             <a href="/" class="brand">
-                day<span>flow.</span>
+                Day<span>flow</span>
             </a>
 
             <div class="mt-4">
