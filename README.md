@@ -281,24 +281,9 @@ Dashboard menggunakan partial Blade untuk komponen yang berulang. Style khusus d
 
 ---
 
-## Development Notes
-
-Dayflow merupakan proyek pengembangan aplikasi web untuk memenuhi kebutuhan pembelajaran dan penerapan konsep Laravel MVC.
-
-Beberapa fitur pada versi ini masih menggunakan data sementara berbasis session dan belum menggunakan database untuk penyimpanan permanen.
-
-Pengembangan selanjutnya dapat mencakup:
-- Implementasi autentikasi pengguna yang lebih lengkap.
-- Integrasi database untuk penyimpanan data tugas.
-- Pengembangan fitur CRUD secara menyeluruh.
-- Peningkatan fitur kalender dan sinkronisasi jadwal.
-- Pengembangan notifikasi dan pengingat aktivitas.
-
----
-
 ## Author
 
-**Developed by:** Yumi
+**Developed by:** yumiii
 
 **Project:** Dayflow — Daily Planner & Productivity Dashboard
 
