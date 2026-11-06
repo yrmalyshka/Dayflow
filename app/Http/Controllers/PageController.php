@@ -62,6 +62,16 @@ class PageController extends Controller
                 'date' => '2026-11-04',
                 'time' => '07:00',
             ],
+            [
+                'id' => 6,
+                'title' => 'Meeting with Client',
+                'description' => 'Discuss project requirements with the client.',
+                'category' => 'Work',
+                'priority' => 'High',
+                'status' => 'In Progress',
+                'date' => '2026-11-04',
+                'time' => '07:00',
+            ],
         ];
     }
 
@@ -115,6 +125,7 @@ class PageController extends Controller
         // Today's Activities
         $todayTasks = collect($tasks)
             ->where('date', now()->format('Y-m-d'))
+            ->where('status', '!=', 'Completed')
             ->sortBy('time')
             ->values();
 
@@ -122,6 +133,14 @@ class PageController extends Controller
         $priorityTasks = collect($tasks)
             ->where('priority', 'High')
             ->where('status', '!=', 'Completed')
+            ->values();
+
+        $inProgressTaskList = collect($tasks)
+            ->where('status', 'In Progress')
+            ->values();
+
+        $toDoTaskList = collect($tasks)
+            ->where('status', 'To Do')
             ->values();
 
         // Weekly Activity
@@ -155,6 +174,8 @@ class PageController extends Controller
             'progress',
             'todayTasks',
             'priorityTasks',
+            'inProgressTaskList',
+            'toDoTaskList',
             'weeklyActivity',
             'maxActivity'
         ));

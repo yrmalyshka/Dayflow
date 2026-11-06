@@ -206,51 +206,109 @@
 
     </div>
 
-    <!-- Priority Tasks and Today's Activities -->
+    <!-- Task Overview and Today's Activities -->
     <div class="row g-3 mb-4">
 
-        <!-- Priority Tasks -->
-        <div class="col-lg-5">
+        <!-- Task Overview -->
+        <div class="col-lg-7">
             <div class="card-custom h-100">
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
-                        <h5 class="fw-bold mb-1">Priority Tasks</h5>
+                        <h5 class="fw-bold mb-1">Task Overview</h5>
                         <p class="page-subtitle mb-0">
-                            Tasks that need your attention
+                            Review tasks by priority and status
                         </p>
                     </div>
 
-                    <i class="bi bi-flag text-secondary fs-4"></i>
+                    <i class="bi bi-list-task text-secondary fs-4"></i>
                 </div>
 
-                @forelse ($priorityTasks as $task)
-
-                    <div class="d-flex align-items-center justify-content-between py-3 border-bottom gap-2">
-
-                        <div class="me-2">
-                            <div class="fw-semibold" style="font-size: 13px;">
-                                {{ $task['title'] }}
-                            </div>
-
-                            <small class="text-secondary">
-                                {{ $task['category'] }}
-                            </small>
-                        </div>
-
-                        <span class="badge-soft badge-high">
-                            {{ $task['priority'] }}
-                        </span>
-
+                <section class="mb-3">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <i class="bi bi-flag text-danger"></i>
+                        <h6 class="fw-bold mb-0">Priority Tasks</h6>
                     </div>
 
-                @empty
+                    @forelse ($priorityTasks as $task)
+                        <div class="d-flex align-items-center justify-content-between py-2 border-bottom gap-2">
+                            <div class="me-2">
+                                <div class="fw-semibold" style="font-size: 13px;">
+                                    {{ $task['title'] }}
+                                </div>
+                                <small class="text-secondary">
+                                    {{ $task['category'] }}
+                                </small>
+                            </div>
 
-                    <p class="page-subtitle mt-3">
-                        No priority tasks at the moment.
-                    </p>
+                            <span class="badge-soft badge-high">
+                                {{ $task['priority'] }}
+                            </span>
+                        </div>
+                    @empty
+                        <p class="page-subtitle mb-0">
+                            No priority tasks at the moment.
+                        </p>
+                    @endforelse
+                </section>
 
-                @endforelse
+                <div class="row g-3">
+                    <section class="col-md-6 border-top pt-3">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <i class="bi bi-hourglass-split text-warning"></i>
+                            <h6 class="fw-bold mb-0">In Progress</h6>
+                        </div>
+
+                        @forelse ($inProgressTaskList as $task)
+                            <div class="d-flex align-items-center justify-content-between py-2 border-bottom gap-2">
+                                <div class="me-2">
+                                    <div class="fw-semibold" style="font-size: 13px;">
+                                        {{ $task['title'] }}
+                                    </div>
+                                    <small class="text-secondary">
+                                        {{ $task['category'] }}
+                                    </small>
+                                </div>
+
+                                <span class="badge-soft badge-medium">
+                                    In Progress
+                                </span>
+                            </div>
+                        @empty
+                            <p class="page-subtitle mb-0">
+                                No tasks in progress right now.
+                            </p>
+                        @endforelse
+                    </section>
+
+                    <section class="col-md-6 border-top pt-3">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <i class="bi bi-clock-history text-secondary"></i>
+                            <h6 class="fw-bold mb-0">To Do</h6>
+                        </div>
+
+                        @forelse ($toDoTaskList as $task)
+                            <div class="d-flex align-items-center justify-content-between py-2 border-bottom gap-2">
+                                <div class="me-2">
+                                    <div class="fw-semibold" style="font-size: 13px;">
+                                        {{ $task['title'] }}
+                                    </div>
+                                    <small class="text-secondary">
+                                        {{ $task['category'] }}
+                                    </small>
+                                </div>
+
+                                <span class="badge-soft badge-low">
+                                    To Do
+                                </span>
+                            </div>
+                        @empty
+                            <p class="page-subtitle mb-0">
+                                No tasks to do right now.
+                            </p>
+                        @endforelse
+                    </section>
+                </div>
 
                 <div class="mt-3">
                     <a href="{{ route('management', ['username' => $username]) }}"
@@ -259,12 +317,11 @@
                         View all tasks <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
-
             </div>
         </div>
 
         <!-- Today's Activities -->
-        <div class="col-lg-7">
+        <div class="col-lg-5">
             <div class="card-custom h-100">
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -302,11 +359,7 @@
                             </small>
                         </div>
 
-                        @if ($task['status'] === 'Completed')
-                            <span class="badge-soft badge-status">
-                                Completed
-                            </span>
-                        @elseif ($task['status'] === 'In Progress')
+                        @if ($task['status'] === 'In Progress')
                             <span class="badge-soft badge-medium">
                                 In Progress
                             </span>
