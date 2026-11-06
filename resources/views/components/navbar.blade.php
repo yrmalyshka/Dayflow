@@ -38,13 +38,7 @@
         </button>
     </div>
 
-    <p
-        class="text-uppercase mt-5 mb-3"
-        style="font-size: 10px; letter-spacing: 1.5px; color: #B0ACBA;"
-    >
-        Menu
-    </p>
-
+    <p class="text-uppercase mt-5 mb-3"style="font-size: 10px; letter-spacing: 1.5px; color: #B0ACBA;">Menu</p>
     <nav class="sidebar-nav flex-column" aria-label="Main navigation">
 
         {{-- Dashboard --}}
@@ -108,13 +102,8 @@
             </div>
 
             <div class="user-details overflow-hidden">
-                <div class="fw-semibold text-truncate" style="font-size: 13px;">
-                    {{ $username }}
-                </div>
-
-                <div class="text-secondary" style="font-size: 11px;">
-                    Personal Account
-                </div>
+                <div class="fw-semibold text-truncate" style="font-size: 13px;">{{ $username }}</div>
+                <div class="text-secondary" style="font-size: 11px;">Personal Account</div>
             </div>
         </div>
 

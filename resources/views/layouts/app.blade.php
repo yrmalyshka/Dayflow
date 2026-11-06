@@ -7,18 +7,15 @@
     <title>@yield('title', 'Dayflow')</title>
 
     <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"rel="stylesheet">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"rel="stylesheet">
 
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
         :root {
@@ -116,9 +113,7 @@
         body.sidebar-collapsed .sidebar > p,
         body.sidebar-collapsed .sidebar .nav-label,
         body.sidebar-collapsed .sidebar .user-details,
-        body.sidebar-collapsed .sidebar .logout-label {
-            display: none;
-        }
+        body.sidebar-collapsed .sidebar .logout-label {display: none;}
 
         body.sidebar-collapsed .sidebar-brand-mark {
             display: inline;
@@ -130,13 +125,9 @@
             padding-inline: 10px;
         }
 
-        body.sidebar-collapsed .sidebar .mt-5 {
-            margin-top: 1.5rem !important;
-        }
+        body.sidebar-collapsed .sidebar .mt-5 {margin-top: 1.5rem !important;}
 
-        body.sidebar-collapsed .main-content {
-            margin-left: 78px;
-        }
+        body.sidebar-collapsed .main-content {margin-left: 78px;}
 
         .brand {
             font-size: 23px;
@@ -145,9 +136,7 @@
             text-decoration: none;
         }
 
-        .brand span {
-            color: var(--primary);
-        }
+        .brand span {color: var(--primary);}
 
         .nav-link {
             display: flex;
@@ -168,9 +157,7 @@
             background: var(--primary-light);
         }
 
-        .nav-link i {
-            font-size: 18px;
-        }
+        .nav-link i {font-size: 18px;}
 
         .page-title {
             font-size: 25px;
@@ -235,9 +222,7 @@
             box-shadow: 0 0 0 3px rgba(145, 130, 189, .12);
         }
 
-        .table {
-            vertical-align: middle;
-        }
+        .table {vertical-align: middle;}
 
         .table th {
             color: var(--muted);
@@ -327,9 +312,7 @@
                 outline-offset: 2px;
             }
 
-            .desktop-nav-toggle {
-                display: none;
-            }
+            .desktop-nav-toggle {display: none;}
 
             .sidebar {
                 width: 100%;
@@ -341,44 +324,27 @@
                 border-bottom: 1px solid var(--border);
             }
 
-            .sidebar.is-open {
-                display: block;
-            }
+            .sidebar.is-open {display: block;}
 
             body.sidebar-collapsed .sidebar {
                 width: 100%;
                 padding: 20px;
             }
 
-            body.sidebar-collapsed .sidebar-brand-row {
-                flex-direction: row;
-            }
-
+            body.sidebar-collapsed .sidebar-brand-row {flex-direction: row;}
             body.sidebar-collapsed .sidebar-brand-label,
             body.sidebar-collapsed .sidebar > p,
             body.sidebar-collapsed .sidebar .nav-label,
             body.sidebar-collapsed .sidebar .user-details,
-            body.sidebar-collapsed .sidebar .logout-label {
-                display: initial;
-            }
-
-            body.sidebar-collapsed .sidebar-brand-mark {
-                display: none;
-            }
-
+            body.sidebar-collapsed .sidebar .logout-label {display: initial;}
+            body.sidebar-collapsed .sidebar-brand-mark {display: none;}
             body.sidebar-collapsed .sidebar .nav-link {
                 justify-content: flex-start;
                 padding: 12px 14px;
             }
 
-            .sidebar > .brand {
-                display: none;
-            }
-
-            .sidebar-brand-row {
-                display: none;
-            }
-
+            .sidebar > .brand {display: none;}
+            .sidebar-brand-row {display: none;}
             .sidebar-nav {
                 display: flex;
                 flex-direction: column;
@@ -391,35 +357,24 @@
                 margin-bottom: 0;
             }
 
-            .sidebar > p {
-                margin-top: 0 !important;
-            }
+            .sidebar > p {margin-top: 0 !important;}
 
             .main-content {
                 margin-left: 0;
                 padding: 22px 16px;
             }
 
-            body.sidebar-collapsed .main-content {
-                margin-left: 0;
-            }
+            body.sidebar-collapsed .main-content {margin-left: 0;}
         }
 
         @media (max-width: 576px) {
             .mobile-nav-header {
                 padding-inline: 16px;
             }
-
-            .page-title {
-                font-size: 21px;
-            }
-
-            .card-custom {
-                padding: 17px;
-            }
+            .page-title {font-size: 21px;}
+            .card-custom {padding: 17px;}
         }
     </style>
-
     @stack('styles')
 </head>
 
