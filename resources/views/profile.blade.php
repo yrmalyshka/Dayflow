@@ -8,9 +8,7 @@
     <main class="main-content">
         <div class="mb-4">
             <h1 class="page-title">My Profile</h1>
-            <p class="page-subtitle">
-                Manage your personal information and productivity.
-            </p>
+            <p class="page-subtitle">Manage your personal information and productivity.</p>
         </div>
 
         <div class="row g-3">
@@ -48,9 +46,7 @@
             <div class="col-lg-8">
                 <div class="card-custom mb-3">
                     <h5 class="fw-bold mb-1">Productivity Overview</h5>
-                    <p class="page-subtitle">
-                        Your overall task completion summary.
-                    </p>
+                    <p class="page-subtitle">Your overall task completion summary.</p>
 
                     <div class="row g-3 mt-2">
                         <div class="col-md-4">
@@ -98,7 +94,6 @@
                 </div>
             </div>
         </div>
-
         <x-footer />
     </main>
 @endsection

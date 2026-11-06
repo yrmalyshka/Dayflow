@@ -8,18 +8,11 @@
 <main class="main-content dashboard-page">
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
         <div>
-            <h1 class="page-title">
-                Good to see you, {{ $username }}!
-            </h1>
-            <p class="page-subtitle mb-0">
-                Here's your productivity overview today.
-            </p>
+            <h1 class="page-title">Good to see you, {{ $username }}!</h1>
+            <p class="page-subtitle mb-0">Here's your productivity overview today.</p>
         </div>
 
-        <a
-            href="{{ route('management', ['username' => $username]) }}"
-            class="btn btn-primary dashboard-manage-button"
-        >
+        <a href="{{ route('management', ['username' => $username]) }}" class="btn btn-primary dashboard-manage-button">
             <i class="bi bi-plus-lg me-1"></i> Manage Tasks
         </a>
     </div>
@@ -88,24 +81,16 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
                         <h5 class="fw-bold mb-1">Weekly Activity</h5>
-                        <p class="page-subtitle mb-0">
-                            Your scheduled tasks this week
-                        </p>
+                        <p class="page-subtitle mb-0">Your scheduled tasks this week</p>
                     </div>
                     <i class="bi bi-bar-chart-line text-secondary fs-4"></i>
                 </div>
 
-                <div
-                    class="d-flex align-items-end justify-content-around dashboard-activity-chart"
-                >
+                <div class="d-flex align-items-end justify-content-around dashboard-activity-chart">
                     @foreach ($weeklyActivity as $activity)
                         <div class="d-flex flex-column align-items-center justify-content-end h-100 flex-fill">
-                            <div
-                                class="d-flex align-items-end justify-content-center w-100 dashboard-activity-track"
-                            >
-                                <div
-                                    class="dashboard-activity-bar"
-                                    style="--activity-height: {{ max(8, ($activity['count'] / $maxActivity) * 100) }}%; --activity-color: {{ $activity['count'] > 0 ? '#9182BD' : '#EAE6F5' }};"
+                            <div class="d-flex align-items-end justify-content-center w-100 dashboard-activity-track">
+                                <div class="dashboard-activity-bar"style="--activity-height: {{ max(8, ($activity['count'] / $maxActivity) * 100) }}%; --activity-color: {{ $activity['count'] > 0 ? '#9182BD' : '#EAE6F5' }};"
                                     title="{{ $activity['count'] }} tasks"
                                 ></div>
                             </div>
@@ -119,19 +104,12 @@
         <div class="col-lg-5">
             <div class="card-custom h-100">
                 <h5 class="fw-bold mb-1">Overall Progress</h5>
-                <p class="page-subtitle">
-                    Your productivity summary
-                </p>
+                <p class="page-subtitle">Your productivity summary</p>
 
                 <div class="d-flex justify-content-center align-items-center my-4">
-                    <div
-                        class="dashboard-progress-ring"
-                        style="--progress: {{ $progress }}%;"
-                    >
+                    <div class="dashboard-progress-ring"style="--progress: {{ $progress }}%;">
                         <div class="dashboard-progress-center">
-                            <div class="fw-bold dashboard-progress-value">
-                                {{ $progress }}%
-                            </div>
+                            <div class="fw-bold dashboard-progress-value">{{ $progress }}%</div>
                             <small class="text-secondary">Completed</small>
                         </div>
                     </div>
@@ -139,17 +117,13 @@
 
                 <div class="d-flex justify-content-center gap-3 flex-wrap">
                     <small class="text-secondary">
-                        <i class="bi bi-circle-fill dashboard-progress-complete"></i>
-                        Completed
+                        <i class="bi bi-circle-fill dashboard-progress-complete"></i>Completed
                     </small>
                     <small class="text-secondary">
-                        <i class="bi bi-circle-fill dashboard-progress-remaining"></i>
-                        Remaining
+                        <i class="bi bi-circle-fill dashboard-progress-remaining"></i>Remaining
                     </small>
                 </div>
-                <p class="page-subtitle text-center mt-3 mb-0">
-                    {{ $completedTasks }} of {{ $totalTasks }} tasks completed.
-                </p>
+                <p class="page-subtitle text-center mt-3 mb-0">{{ $completedTasks }} of {{ $totalTasks }} tasks completed.</p>
             </div>
         </div>
     </div>
@@ -160,12 +134,8 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
                         <h5 class="fw-bold mb-1">Task Overview</h5>
-                        <p class="page-subtitle mb-0">
-                            Review tasks by priority and status
-                        </p>
-                    </div>
-                    <i class="bi bi-list-task text-secondary fs-4"></i>
-                </div>
+                        <p class="page-subtitle mb-0">Review tasks by priority and status</p>
+                    </div><i class="bi bi-list-task text-secondary fs-4"></i></div>
 
                 <section class="mb-3">
                     <div class="d-flex align-items-center gap-2 mb-2">
@@ -176,11 +146,9 @@
                     @forelse ($priorityTasks as $task)
                         <div class="d-flex align-items-center justify-content-between py-2 border-bottom gap-2">
                             <div class="me-2">
-                                <div class="fw-semibold dashboard-task-title">
-                                    {{ $task['title'] }}
+                                <div class="fw-semibold dashboard-task-title">{{ $task['title'] }}
                                 </div>
-                                <small class="text-secondary">
-                                    {{ $task['category'] }}
+                                <small class="text-secondary">{{ $task['category'] }}
                                 </small>
                             </div>
                             <span class="badge-soft badge-high">
@@ -188,9 +156,7 @@
                             </span>
                         </div>
                     @empty
-                        <p class="page-subtitle mb-0">
-                            No priority tasks at the moment.
-                        </p>
+                        <p class="page-subtitle mb-0">No priority tasks at the moment.</p>
                     @endforelse
                 </section>
 
@@ -204,21 +170,13 @@
                         @forelse ($inProgressTaskList as $task)
                             <div class="d-flex align-items-center justify-content-between py-2 border-bottom gap-2">
                                 <div class="me-2">
-                                    <div class="fw-semibold dashboard-task-title">
-                                        {{ $task['title'] }}
-                                    </div>
-                                    <small class="text-secondary">
-                                        {{ $task['category'] }}
-                                    </small>
+                                    <div class="fw-semibold dashboard-task-title">{{ $task['title'] }}</div>
+                                    <small class="text-secondary">{{ $task['category'] }}</small>
                                 </div>
-                                <span class="badge-soft badge-medium">
-                                    In Progress
-                                </span>
+                                <span class="badge-soft badge-medium">In Progress</span>
                             </div>
                         @empty
-                            <p class="page-subtitle mb-0">
-                                No tasks in progress right now.
-                            </p>
+                            <p class="page-subtitle mb-0">No tasks in progress right now.</p>
                         @endforelse
                     </section>
 
@@ -231,30 +189,21 @@
                         @forelse ($toDoTaskList as $task)
                             <div class="d-flex align-items-center justify-content-between py-2 border-bottom gap-2">
                                 <div class="me-2">
-                                    <div class="fw-semibold dashboard-task-title">
-                                        {{ $task['title'] }}
+                                    <div class="fw-semibold dashboard-task-title">{{ $task['title'] }}
                                     </div>
-                                    <small class="text-secondary">
-                                        {{ $task['category'] }}
+                                    <small class="text-secondary">{{ $task['category'] }}
                                     </small>
                                 </div>
-                                <span class="badge-soft badge-low">
-                                    To Do
-                                </span>
+                                <span class="badge-soft badge-low">To Do</span>
                             </div>
                         @empty
-                            <p class="page-subtitle mb-0">
-                                No tasks to do right now.
-                            </p>
+                            <p class="page-subtitle mb-0">No tasks to do right now.</p>
                         @endforelse
                     </section>
                 </div>
 
                 <div class="mt-3">
-                    <a
-                        href="{{ route('management', ['username' => $username]) }}"
-                        class="text-decoration-none small fw-semibold dashboard-list-link"
-                    >
+                    <a href="{{ route('management', ['username' => $username]) }}"class="text-decoration-none small fw-semibold dashboard-list-link">
                         View all tasks <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
@@ -266,15 +215,10 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
                         <h5 class="fw-bold mb-1">Today's Activities</h5>
-                        <p class="page-subtitle mb-0">
-                            Your schedule for today
-                        </p>
+                        <p class="page-subtitle mb-0">Your schedule for today</p>
                     </div>
 
-                    <a
-                        href="{{ route('management', ['username' => $username]) }}"
-                        class="text-decoration-none small fw-semibold dashboard-list-link"
-                    >
+                    <a href="{{ route('management', ['username' => $username]) }}"class="text-decoration-none small fw-semibold dashboard-list-link">
                         View all <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
@@ -282,17 +226,11 @@
                 @forelse ($todayTasks as $task)
                     <div class="d-flex align-items-center gap-3 py-3 border-bottom">
                         <div class="text-center dashboard-activity-time">
-                            <div
-                                class="fw-semibold"
-                            >
-                                {{ date('h:i A', strtotime($task['time'])) }}
-                            </div>
+                            <div class="fw-semibold">{{ date('h:i A', strtotime($task['time'])) }}</div>
                         </div>
 
                         <div class="flex-grow-1">
-                            <div class="fw-semibold dashboard-activity-title">
-                                {{ $task['title'] }}
-                            </div>
+                            <div class="fw-semibold dashboard-activity-title">{{ $task['title'] }}</div>
                             <small class="text-secondary">{{ $task['category'] }}</small>
                         </div>
 
@@ -303,14 +241,11 @@
                         @endif
                     </div>
                 @empty
-                    <p class="page-subtitle mt-3">
-                        No activities scheduled for today.
-                    </p>
+                    <p class="page-subtitle mt-3">No activities scheduled for today.</p>
                 @endforelse
             </div>
         </div>
     </div>
-
     <x-footer />
 </main>
 

@@ -9,18 +9,14 @@
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
         <div>
             <h1 class="page-title">Task Management</h1>
-            <p class="page-subtitle mb-0">
-                Organize and manage all your activities.
-            </p>
+            <p class="page-subtitle mb-0">Organize and manage all your activities.</p>
         </div>
     </div>
 
     <section class="card-custom mb-4" aria-label="Task filters">
         <div class="row g-3">
             <div class="col-lg-4">
-                <label for="searchTask" class="form-label small fw-semibold">
-                    Search Task
-                </label>
+                <label for="searchTask" class="form-label small fw-semibold">Search Task</label>
                 <div class="input-group">
                     <span class="input-group-text bg-white management-search-icon">
                         <i class="bi bi-search text-secondary"></i>
@@ -35,9 +31,7 @@
             </div>
 
             <div class="col-lg-2 col-md-4">
-                <label for="filterCategory" class="form-label small fw-semibold">
-                    Category
-                </label>
+                <label for="filterCategory" class="form-label small fw-semibold">Category</label>
                 <select id="filterCategory" class="form-select">
                     <option value="">All Categories</option>
                     <option value="Study">Study</option>
@@ -47,9 +41,7 @@
             </div>
 
             <div class="col-lg-2 col-md-4">
-                <label for="filterPriority" class="form-label small fw-semibold">
-                    Priority
-                </label>
+                <label for="filterPriority" class="form-label small fw-semibold">Priority</label>
                 <select id="filterPriority" class="form-select">
                     <option value="">All Priorities</option>
                     <option value="High">High</option>
@@ -59,9 +51,7 @@
             </div>
 
             <div class="col-lg-2 col-md-4">
-                <label for="filterStatus" class="form-label small fw-semibold">
-                    Status
-                </label>
+                <label for="filterStatus" class="form-label small fw-semibold">Status</label>
                 <select id="filterStatus" class="form-select">
                     <option value="">All Status</option>
                     <option value="To Do">To Do</option>
@@ -76,8 +66,7 @@
                     id="resetFilter"
                     class="btn btn-outline-secondary w-100 management-reset-button"
                 >
-                    <i class="bi bi-arrow-counterclockwise me-1"></i>
-                    Reset
+                    <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
                 </button>
             </div>
         </div>
@@ -86,17 +75,11 @@
     <section class="card-custom" aria-labelledby="activityListTitle">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <div>
-                <h2 id="activityListTitle" class="h5 fw-bold mb-1">
-                    All Activities
-                </h2>
-                <p class="page-subtitle mb-0">
-                    Manage your tasks and track progress.
-                </p>
+                <h2 id="activityListTitle" class="h5 fw-bold mb-1">All Activities</h2>
+                <p class="page-subtitle mb-0">Manage your tasks and track progress.</p>
             </div>
 
-            <span class="badge-soft badge-status" id="taskCount">
-                {{ count($tasks) }} Tasks
-            </span>
+            <span class="badge-soft badge-status" id="taskCount">{{ count($tasks) }} Tasks</span>
         </div>
 
         <div class="table-responsive">
@@ -120,21 +103,13 @@
                             data-status="{{ $task['status'] }}"
                         >
                             <td>
-                                <div class="fw-semibold task-title">
-                                    {{ $task['title'] }}
-                                </div>
-                                <small class="text-secondary">
-                                    {{ $task['description'] }}
-                                </small>
+                                <div class="fw-semibold task-title">{{ $task['title'] }}</div>
+                                <small class="text-secondary">{{ $task['description'] }}</small>
                             </td>
                             <td>{{ $task['category'] }}</td>
                             <td>
-                                <div>
-                                    {{ date('d M Y', strtotime($task['date'])) }}
-                                </div>
-                                <small class="text-secondary">
-                                    {{ date('h:i A', strtotime($task['time'])) }}
-                                </small>
+                                <div>{{ date('d M Y', strtotime($task['date'])) }}</div>
+                                <small class="text-secondary">{{ date('h:i A', strtotime($task['time'])) }}</small>
                             </td>
                             <td>
                                 <span @class([
@@ -147,9 +122,7 @@
                                 </span>
                             </td>
                             <td>
-                                <span class="badge-soft badge-status status-label">
-                                    {{ $task['status'] }}
-                                </span>
+                                <span class="badge-soft badge-status status-label">{{ $task['status'] }}</span>
                             </td>
                         </tr>
                     @endforeach
@@ -159,13 +132,10 @@
             <div id="emptyState" class="text-center py-5 d-none">
                 <i class="bi bi-inbox fs-1 text-secondary"></i>
                 <h3 class="h6 fw-bold mt-3">No activities found</h3>
-                <p class="page-subtitle">
-                    Try changing your search or filters.
-                </p>
+                <p class="page-subtitle">Try changing your search or filters.</p>
             </div>
         </div>
     </section>
-
     <x-footer />
 </main>
 

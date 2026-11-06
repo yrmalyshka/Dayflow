@@ -52,13 +52,11 @@
             <div class="calendar-main">
                 <div class="calendar-toolbar">
                     <div class="calendar-navigation">
-                        <button id="previousPeriod" class="nav-calendar-btn"
-                            aria-label="Previous period">
+                        <button id="previousPeriod" class="nav-calendar-btn"aria-label="Previous period">
                             <i class="bi bi-chevron-left"></i>
                         </button>
 
-                        <button id="nextPeriod" class="nav-calendar-btn"
-                            aria-label="Next period">
+                        <button id="nextPeriod" class="nav-calendar-btn"aria-label="Next period">
                             <i class="bi bi-chevron-right"></i>
                         </button>
 
@@ -74,8 +72,7 @@
                 </div>
 
                 <div
-                    id="calendar"
-                    data-events-url="{{ route('calendar.events.index') }}"
+                    id="calendar"data-events-url="{{ route('calendar.events.index') }}"
                 ></div>
 
                 <div class="calendar-legend">
@@ -84,8 +81,7 @@
                     <span><i class="legend-dot study"></i> Study</span>
                 </div>
 
-                <div id="calendarNotice" class="calendar-notice" role="alert"
-                    hidden></div>
+                <div id="calendarNotice" class="calendar-notice" role="alert"hidden></div>
             </div>
 
             <aside class="upcoming-panel">
@@ -103,39 +99,28 @@
                     <h4>Event Categories</h4>
 
                     <label>
-                        <input type="checkbox" checked
-                            data-category="Personal">
-                        <span class="filter-dot personal"></span>
-                        Personal
+                        <input type="checkbox" checked data-category="Personal">
+                        <span class="filter-dot personal"></span>Personal
                     </label>
 
                     <label>
-                        <input type="checkbox" checked
-                            data-category="Work">
-                        <span class="filter-dot work"></span>
-                        Work
+                        <input type="checkbox" checked data-category="Work">
+                        <span class="filter-dot work"></span>Work
                     </label>
 
                     <label>
-                        <input type="checkbox" checked
-                            data-category="Study">
-                        <span class="filter-dot study"></span>
-                        Study
+                        <input type="checkbox" checked data-category="Study">
+                        <span class="filter-dot study"></span>Study
                     </label>
                 </div>
             </aside>
         </div>
-
     </div>
-
     <x-footer />
 </main>
 
 @push('styles')
-    <link
-        href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.css"
-        rel="stylesheet"
-    >
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.css" rel="stylesheet">
     @vite('resources/css/calendar.css')
 @endpush
 
