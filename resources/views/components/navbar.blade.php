@@ -5,14 +5,14 @@
 
 <header class="mobile-nav-header">
     <a class="brand" href="{{ route('dashboard', ['username' => $username]) }}">
-        day<span>flow.</span>
+        Day<span>flow</span>
     </a>
 
     <button
         class="mobile-nav-toggle"
         type="button"
         aria-label="Open navigation menu"
-        aria-controls="primary-navigation"
+        aria-controls="pr imary-navigation"
         aria-expanded="false"
     >
         <i class="bi bi-list" aria-hidden="true"></i>
@@ -22,8 +22,8 @@
 <aside class="sidebar" id="primary-navigation">
     <div class="sidebar-brand-row">
         <a class="brand" href="{{ route('dashboard', ['username' => $username]) }}">
-            <span class="sidebar-brand-label">day<span>flow.</span></span>
-            <span class="sidebar-brand-mark" aria-hidden="true">d<span>.</span></span>
+            <span class="sidebar-brand-label">Day<span>flow</span></span>
+            <span class="sidebar-brand-mark" aria-hidden="true">D</span>
         </a>
 
         <button

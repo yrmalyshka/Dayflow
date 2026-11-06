@@ -17,12 +17,6 @@
             </p>
         </div>
 
-        <button class="btn-primary-custom"
-                data-bs-toggle="modal"
-                data-bs-target="#addTaskModal">
-            <i class="bi bi-plus-lg me-1"></i>
-            Add New Task
-        </button>
     </div>
 
     <!-- Filters -->
@@ -113,7 +107,6 @@
                         <th>DATE & TIME</th>
                         <th>PRIORITY</th>
                         <th>STATUS</th>
-                        <th>ACTION</th>
                     </tr>
                 </thead>
 
@@ -157,14 +150,6 @@
                                 </span>
                             </td>
 
-                            <td>
-                                <button type="button"
-                                        class="btn btn-sm btn-outline-secondary toggle-status"
-                                        style="border-radius: 8px;">
-                                    <i class="bi bi-arrow-repeat"></i>
-                                </button>
-                            </td>
-
                         </tr>
                     @endforeach
 
@@ -188,117 +173,6 @@
 
 </main>
 
-<!-- Add Task Modal -->
-<div class="modal fade" id="addTaskModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0" style="border-radius: 16px;">
-
-            <form id="addTaskForm">
-
-                <div class="modal-header border-0 p-4">
-                    <div>
-                        <h5 class="fw-bold mb-1">Create New Task</h5>
-                        <p class="page-subtitle mb-0">
-                            Add a new activity to your planner.
-                        </p>
-                    </div>
-
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal">
-                    </button>
-                </div>
-
-                <div class="modal-body px-4">
-
-                    <div class="mb-3">
-                        <label class="form-label small fw-semibold">
-                            Task Name
-                        </label>
-                        <input type="text"
-                               id="newTitle"
-                               class="form-control"
-                               placeholder="Enter task name"
-                               required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label small fw-semibold">
-                            Description
-                        </label>
-                        <textarea id="newDescription"
-                                  class="form-control"
-                                  rows="2"
-                                  placeholder="Describe your task"></textarea>
-                    </div>
-
-                    <div class="row g-3">
-
-                        <div class="col-6">
-                            <label class="form-label small fw-semibold">
-                                Category
-                            </label>
-                            <select id="newCategory" class="form-select">
-                                <option>Study</option>
-                                <option>Work</option>
-                                <option>Personal</option>
-                            </select>
-                        </div>
-
-                        <div class="col-6">
-                            <label class="form-label small fw-semibold">
-                                Priority
-                            </label>
-                            <select id="newPriority" class="form-select">
-                                <option>Low</option>
-                                <option>Medium</option>
-                                <option>High</option>
-                            </select>
-                        </div>
-
-                        <div class="col-6">
-                            <label class="form-label small fw-semibold">
-                                Date
-                            </label>
-                            <input type="date"
-                                   id="newDate"
-                                   class="form-control"
-                                   required>
-                        </div>
-
-                        <div class="col-6">
-                            <label class="form-label small fw-semibold">
-                                Time
-                            </label>
-                            <input type="time"
-                                   id="newTime"
-                                   class="form-control"
-                                   required>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="modal-footer border-0 px-4 pb-4">
-                    <button type="button"
-                            class="btn btn-light"
-                            data-bs-dismiss="modal">
-                        Cancel
-                    </button>
-
-                    <button type="submit"
-                            class="btn-primary-custom">
-                        Create Task
-                    </button>
-                </div>
-
-            </form>
-
-        </div>
-    </div>
-</div>
-
 @endsection
 
 @push('scripts')
@@ -307,7 +181,6 @@
     const categoryFilter = document.getElementById('filterCategory');
     const priorityFilter = document.getElementById('filterPriority');
     const statusFilter = document.getElementById('filterStatus');
-    const taskList = document.getElementById('taskList');
     const emptyState = document.getElementById('emptyState');
     const taskCount = document.getElementById('taskCount');
 
@@ -354,115 +227,5 @@
         filterTasks();
     });
 
-    // Toggle status secara lokal
-    taskList.addEventListener('click', event => {
-        const button = event.target.closest('.toggle-status');
-
-        if (!button) return;
-
-        const row = button.closest('.task-row');
-        const label = row.querySelector('.status-label');
-
-        const currentStatus = row.dataset.status;
-
-        const nextStatus = {
-            'To Do': 'In Progress',
-            'In Progress': 'Completed',
-            'Completed': 'To Do'
-        };
-
-        const updatedStatus = nextStatus[currentStatus];
-
-        row.dataset.status = updatedStatus;
-        label.textContent = updatedStatus;
-
-        filterTasks();
-    });
-
-    // Menambahkan task secara lokal ke tabel
-    document.getElementById('addTaskForm').addEventListener('submit', event => {
-        event.preventDefault();
-
-        const title = document.getElementById('newTitle').value.trim();
-        const description = document.getElementById('newDescription').value.trim();
-        const category = document.getElementById('newCategory').value;
-        const priority = document.getElementById('newPriority').value;
-        const date = document.getElementById('newDate').value;
-        const time = document.getElementById('newTime').value;
-
-        if (!title || !date || !time) return;
-
-        const row = document.createElement('tr');
-        row.className = 'task-row';
-
-        row.dataset.title = title.toLowerCase();
-        row.dataset.category = category;
-        row.dataset.priority = priority;
-        row.dataset.status = 'To Do';
-
-        const priorityClass = {
-            High: 'badge-high',
-            Medium: 'badge-medium',
-            Low: 'badge-low'
-        }[priority];
-
-        const safe = value => {
-            const element = document.createElement('span');
-            element.textContent = value;
-            return element.innerHTML;
-        };
-
-        const formattedDate = new Date(date + 'T00:00:00')
-            .toLocaleDateString('en-GB', {
-                day: '2-digit',
-                month: 'short',
-                year: 'numeric'
-            });
-
-        const formattedTime = new Date('2000-01-01T' + time)
-            .toLocaleTimeString('en-US', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-
-        row.innerHTML = `
-            <td>
-                <div class="fw-semibold task-title">${safe(title)}</div>
-                <small class="text-secondary">${safe(description)}</small>
-            </td>
-            <td>${safe(category)}</td>
-            <td>
-                <div>${formattedDate}</div>
-                <small class="text-secondary">${formattedTime}</small>
-            </td>
-            <td>
-                <span class="badge-soft ${priorityClass}">
-                    ${priority}
-                </span>
-            </td>
-            <td>
-                <span class="badge-soft badge-status status-label">
-                    To Do
-                </span>
-            </td>
-            <td>
-                <button type="button"
-                        class="btn btn-sm btn-outline-secondary toggle-status"
-                        style="border-radius: 8px;">
-                    <i class="bi bi-arrow-repeat"></i>
-                </button>
-            </td>
-        `;
-
-        taskList.appendChild(row);
-
-        document.getElementById('addTaskForm').reset();
-
-        bootstrap.Modal.getInstance(
-            document.getElementById('addTaskModal')
-        ).hide();
-
-        filterTasks();
-    });
 </script>
 @endpush

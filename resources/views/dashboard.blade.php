@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('title', 'Dashboard | Dayflow')
@@ -19,11 +18,6 @@
             </p>
         </div>
 
-        <a href="{{ route('management', ['username' => $username]) }}"
-           class="btn btn-primary-custom">
-            <i class="bi bi-plus-lg me-1"></i>
-            Add New Task
-        </a>
     </div>
 
     <!-- Summary Cards -->
@@ -108,15 +102,25 @@
                         <p class="page-subtitle mb-0">Tasks that need your attention</p>
                     </div>
 
-                    <i class="bi bi-flag text-secondary fs-4"></i>
+                    <div class="d-flex align-items-center gap-3">
+                        <a href="{{ route('management', ['username' => $username]) }}"
+                        class="text-decoration-none small fw-semibold"
+                        style="color: #9182BD;">
+                            View All <i class="bi bi-arrow-up-right"></i>
+                        </a>
+
+                        <i class="bi bi-flag text-secondary fs-4"></i>
+                    </div>
                 </div>
 
                 @forelse ($priorityTasks as $task)
                     <div class="d-flex align-items-center justify-content-between py-3 border-bottom">
-                        <div>
+
+                        <div class="me-3">
                             <div class="fw-semibold" style="font-size: 13px;">
                                 {{ $task['title'] }}
                             </div>
+
                             <small class="text-secondary">
                                 {{ $task['category'] }}
                             </small>
@@ -125,11 +129,13 @@
                         <span class="badge-soft badge-high">
                             {{ $task['priority'] }}
                         </span>
+
                     </div>
                 @empty
-                    <p class="page-subtitle">No priority tasks at the moment.</p>
+                    <p class="page-subtitle">
+                        No priority tasks at the moment.
+                    </p>
                 @endforelse
-
             </div>
         </div>
 
@@ -161,7 +167,7 @@
                             </div>
                         </div>
 
-                        <div class="flex-grow-1">
+                        <div class="grow">
                             <div class="fw-semibold" style="font-size: 13px;">
                                 {{ $task['title'] }}
                             </div>

@@ -15,35 +15,6 @@
                 <p>Organize your schedule and stay on track.</p>
             </div>
 
-            <div class="header-actions">
-                @if ($googleConnected)
-                    <span class="google-connected">
-                        <i class="bi bi-check-circle-fill"></i>
-                        Google Calendar connected
-                    </span>
-
-                    <form action="{{ route('google.disconnect', ['username' => $username]) }}"
-                        method="POST">
-                        @csrf
-                        <button type="submit" class="btn-google">
-                            Disconnect
-                        </button>
-                    </form>
-                @else
-                    <a href="{{ route('google.redirect', ['username' => $username]) }}"
-                        class="btn-google">
-                        <i class="bi bi-google"></i>
-                        Connect Google
-                    </a>
-                @endif
-
-                <button class="btn-add" data-bs-toggle="modal"
-                    data-bs-target="#eventModal" onclick="prepareAddEvent()"
-                    @disabled(!$googleConnected)>
-                    <i class="bi bi-plus-lg"></i>
-                    Add Event
-                </button>
-            </div>
         </div>
 
         {{-- SUMMARY CARDS --}}
@@ -53,7 +24,7 @@
                     <i class="bi bi-calendar-event"></i>
                 </div>
                 <div>
-                    <span>Total Events</span>
+                    <span>Total Items</span>
                     <h3 id="totalEvents">0</h3>
                 </div>
             </div>
@@ -63,7 +34,7 @@
                     <i class="bi bi-calendar-check"></i>
                 </div>
                 <div>
-                    <span>Today's Events</span>
+                    <span>Today's Items</span>
                     <h3 id="todayEvents">0</h3>
                 </div>
             </div>
@@ -73,7 +44,7 @@
                     <i class="bi bi-clock-history"></i>
                 </div>
                 <div>
-                    <span>Upcoming</span>
+                    <span>Upcoming Items</span>
                     <h3 id="upcomingEvents">0</h3>
                 </div>
             </div>
@@ -107,16 +78,6 @@
                     </div>
                 </div>
 
-                @unless ($googleConnected)
-                    <div class="calendar-connect-prompt">
-                        <i class="bi bi-calendar-plus"></i>
-                        <div>
-                            <strong>Connect Google Calendar to get started</strong>
-                            <p>Your Google events will appear here and stay in sync.</p>
-                        </div>
-                    </div>
-                @endunless
-
                 <div id="calendar"></div>
 
                 <div class="calendar-legend">
@@ -133,7 +94,7 @@
             <aside class="upcoming-panel">
                 <div class="panel-heading">
                     <div>
-                        <h3>Upcoming Events</h3>
+                        <h3>Upcoming Schedule</h3>
                         <p>Your next activities</p>
                     </div>
                     <i class="bi bi-calendar3"></i>
@@ -171,104 +132,6 @@
     </div>
 </div>
 
-{{-- ADD / EDIT EVENT MODAL --}}
-<div class="modal fade" id="eventModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content event-modal">
-
-            <div class="modal-header">
-                <div>
-                    <h5 id="modalTitle">Add New Event</h5>
-                    <p>Fill in your event details.</p>
-                </div>
-                <button type="button" class="btn-close"
-                    data-bs-dismiss="modal"></button>
-            </div>
-
-            <form id="eventForm">
-                @csrf
-                <div class="modal-body">
-                    <input type="hidden" id="eventId">
-
-                    <div class="mb-3">
-                        <label class="form-label">Event Title</label>
-                        <input type="text" id="eventTitle"
-                            class="form-control"
-                            placeholder="e.g. Team Meeting" required>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6 mb-3">
-                            <label class="form-label">Start Date</label>
-                            <input type="date" id="eventStartDate"
-                                class="form-control" required>
-                        </div>
-
-                        <div class="col-6 mb-3">
-                            <label class="form-label">Start Time</label>
-                            <input type="time" id="eventStartTime"
-                                class="form-control">
-                        </div>
-
-                        <div class="col-6 mb-3">
-                            <label class="form-label">End Date</label>
-                            <input type="date" id="eventEndDate"
-                                class="form-control" required>
-                        </div>
-
-                        <div class="col-6 mb-3">
-                            <label class="form-label">End Time</label>
-                            <input type="time" id="eventEndTime"
-                                class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Category</label>
-                        <select id="eventCategory" class="form-select">
-                            <option value="Personal">Personal</option>
-                            <option value="Work">Work</option>
-                            <option value="Study">Study</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Description</label>
-                        <textarea id="eventDescription"
-                            class="form-control" rows="3"
-                            placeholder="Add event notes..."></textarea>
-                    </div>
-
-                    <div class="form-check">
-                        <input type="checkbox" id="allDay"
-                            class="form-check-input">
-                        <label class="form-check-label" for="allDay">
-                            All day event
-                        </label>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" id="deleteEventBtn"
-                        class="btn-delete" onclick="deleteEvent()">
-                        Delete
-                    </button>
-
-                    <button type="button" class="btn-cancel"
-                        data-bs-dismiss="modal">
-                        Cancel
-                    </button>
-
-                    <button type="submit" class="btn-save">
-                        Save Event
-                    </button>
-                </div>
-            </form>
-
-        </div>
-    </div>
-</div>
-
 <x-footer />
 
 <style>
@@ -278,30 +141,6 @@
     min-width: 0;
     padding: 4px 0 24px;
     color: #373247;
-}
-
-.calendar-connect-prompt {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 16px;
-    padding: 14px 16px;
-    border: 1px solid #E8E4F0;
-    border-radius: 12px;
-    background: #FAF9FC;
-    color: #514968;
-    font-size: 13px;
-}
-
-.calendar-connect-prompt > i {
-    color: #9182BD;
-    font-size: 18px;
-}
-
-.calendar-connect-prompt p {
-    margin: 4px 0 0;
-    color: #9691A5;
-    font-size: 12px;
 }
 
 .calendar-container {
@@ -347,23 +186,7 @@
     gap: 10px;
 }
 
-.header-actions form {
-    margin: 0;
-}
-
-.google-connected {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 10px 12px;
-    border-radius: 10px;
-    background: #EFF8F1;
-    color: #39834C;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.btn-google, .btn-add {
+.btn-add {
     border-radius: 10px;
     padding: 11px 16px;
     font-size: 13px;
@@ -372,18 +195,6 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-}
-
-.btn-google {
-    background: white;
-    color: #514968;
-    border: 1px solid #E8E4F0;
-    cursor: pointer;
-}
-
-.btn-google:hover {
-    background: #F8F7FC;
-    color: #514968;
 }
 
 .btn-add, .btn-save {
@@ -397,9 +208,15 @@
     color: white;
 }
 
-.btn-add:disabled {
-    cursor: not-allowed;
-    opacity: .55;
+.btn-add-secondary {
+    background: white;
+    color: #514968;
+    border: 1px solid #E8E4F0;
+}
+
+.btn-add-secondary:hover {
+    background: #F8F7FC;
+    color: #514968;
 }
 
 .calendar-stats {
@@ -787,11 +604,6 @@
         justify-content: center;
     }
 
-    .google-connected {
-        flex: 1 1 100%;
-        justify-content: center;
-    }
-
     .calendar-stats {
         grid-template-columns: 1fr;
         gap: 10px;
@@ -851,20 +663,13 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     const calendarEl = document.getElementById('calendar');
-    const modalElement = document.getElementById('eventModal');
-    const eventModal = new bootstrap.Modal(modalElement);
-    const googleConnected = @json($googleConnected);
-    const eventsUrl = @json(route('google.events.index'));
-    const csrfToken = document.querySelector('#eventForm input[name="_token"]').value;
+    const eventsUrl = @json(route('calendar.events.index'));
 
     const categoryColors = {
         Personal: '#B8A9DF',
         Work: '#8DA9D5',
         Study: '#E8B77E'
     };
-    const allDayInput = document.getElementById('allDay');
-    const startTimeInput = document.getElementById('eventStartTime');
-    const endTimeInput = document.getElementById('eventEndTime');
     let upcomingEvents = [];
 
     async function requestJson(url, options = {}) {
@@ -896,30 +701,21 @@ document.addEventListener('DOMContentLoaded', function () {
         notice.hidden = true;
     }
 
-    function syncAllDayTimeFields() {
-        startTimeInput.disabled = allDayInput.checked;
-        endTimeInput.disabled = allDayInput.checked;
-        startTimeInput.required = !allDayInput.checked;
-        endTimeInput.required = !allDayInput.checked;
+    function formatDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+
+        return `${year}-${month}-${day}`;
     }
-
-    allDayInput.addEventListener('change', syncAllDayTimeFields);
-
-    let selectedEvent = null;
 
     const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         height: 'auto',
         headerToolbar: false,
         dayMaxEvents: 3,
-        selectable: true,
         editable: false,
         events: function(fetchInfo, successCallback, failureCallback) {
-            if (!googleConnected) {
-                successCallback([]);
-                return;
-            }
-
             const params = new URLSearchParams({
                 start: fetchInfo.startStr,
                 end: fetchInfo.endStr
@@ -952,18 +748,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         eventsSet: function() {
             updateSummary();
-        },
-
-        dateClick: function(info) {
-            if (!googleConnected) {
-                return;
-            }
-
-            prepareAddEvent(info.dateStr);
-        },
-
-        eventClick: function(info) {
-            openEditEvent(info.event);
         }
     });
 
@@ -998,163 +782,6 @@ document.addEventListener('DOMContentLoaded', function () {
             updateSummary();
         });
     });
-
-    // FORM HELPERS
-    window.prepareAddEvent = function(date = null) {
-        if (!googleConnected) {
-            return;
-        }
-
-        selectedEvent = null;
-
-        document.getElementById('eventForm').reset();
-        syncAllDayTimeFields();
-        document.getElementById('eventId').value = '';
-        document.getElementById('modalTitle').textContent = 'Add New Event';
-        document.getElementById('deleteEventBtn').style.display = 'none';
-
-        const start = date && date.includes('T')
-            ? new Date(date)
-            : new Date(`${date || formatDate(new Date())}T09:00:00`);
-        const end = new Date(start.getTime() + 3600000);
-
-        document.getElementById('eventStartDate').value = formatDate(start);
-        document.getElementById('eventEndDate').value = formatDate(end);
-        startTimeInput.value = formatTime(start);
-        endTimeInput.value = formatTime(end);
-
-        eventModal.show();
-    };
-
-    function openEditEvent(event) {
-        selectedEvent = event;
-
-        const start = event.start;
-        const end = event.end || new Date(start.getTime() + 3600000);
-
-        document.getElementById('modalTitle').textContent = 'Edit Event';
-        document.getElementById('deleteEventBtn').style.display = 'inline-block';
-
-        document.getElementById('eventId').value = event.id;
-        document.getElementById('eventTitle').value = event.title;
-        document.getElementById('eventStartDate').value = formatDate(start);
-        document.getElementById('eventEndDate').value = event.allDay
-            ? addDaysToDateString(formatDate(end), -1)
-            : formatDate(end);
-        allDayInput.checked = event.allDay;
-        syncAllDayTimeFields();
-        startTimeInput.value = event.allDay ? '' : formatTime(start);
-        endTimeInput.value = event.allDay ? '' : formatTime(end);
-        document.getElementById('eventCategory').value =
-            event.extendedProps.category || 'Personal';
-        document.getElementById('eventDescription').value =
-            event.extendedProps.description || '';
-
-        eventModal.show();
-    }
-
-    function formatDate(date) {
-        const y = date.getFullYear();
-        const m = String(date.getMonth() + 1).padStart(2, '0');
-        const d = String(date.getDate()).padStart(2, '0');
-        return `${y}-${m}-${d}`;
-    }
-
-    function formatTime(date) {
-        return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
-    }
-
-    function addDaysToDateString(date, days) {
-        const [year, month, day] = date.split('-').map(Number);
-        return formatDate(new Date(year, month - 1, day + days));
-    }
-
-    // SAVE EVENT
-    document.getElementById('eventForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const id = document.getElementById('eventId').value;
-        const title = document.getElementById('eventTitle').value.trim();
-        const startDate = document.getElementById('eventStartDate').value;
-        const endDate = document.getElementById('eventEndDate').value;
-        const startTime = document.getElementById('eventStartTime').value;
-        const endTime = document.getElementById('eventEndTime').value;
-        const category = document.getElementById('eventCategory').value;
-        const description = document.getElementById('eventDescription').value;
-        const allDay = document.getElementById('allDay').checked;
-
-        if (!title || !startDate || !endDate || (!allDay && (!startTime || !endTime))) {
-            alert('Please complete all required fields.');
-            return;
-        }
-
-        const start = allDay ? startDate : `${startDate}T${startTime}:00`;
-        const end = allDay
-            ? addDaysToDateString(endDate, 1)
-            : `${endDate}T${endTime}:00`;
-
-        if (allDay ? endDate < startDate : new Date(end) <= new Date(start)) {
-            showCalendarNotice('End date and time must be after the start.');
-            return;
-        }
-
-        const payload = {
-            title,
-            start_date: startDate,
-            end_date: endDate,
-            start_time: allDay ? null : startTime,
-            end_time: allDay ? null : endTime,
-            all_day: allDay,
-            category,
-            description
-        };
-        const submitButton = this.querySelector('[type="submit"]');
-        submitButton.disabled = true;
-
-        requestJson(id ? `${eventsUrl}/${encodeURIComponent(id)}` : eventsUrl, {
-            method: id ? 'PATCH' : 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken
-            },
-            body: JSON.stringify(payload)
-        }).then(() => {
-            hideCalendarNotice();
-            eventModal.hide();
-            calendar.refetchEvents();
-            loadUpcomingEvents();
-        }).catch(error => {
-            showCalendarNotice(error.message);
-        }).finally(() => {
-            submitButton.disabled = false;
-        });
-    });
-
-    // DELETE EVENT
-    window.deleteEvent = function() {
-        if (!selectedEvent) {
-            return;
-        }
-
-        if (!confirm('Are you sure you want to delete this event?')) {
-            return;
-        }
-
-        requestJson(`${eventsUrl}/${encodeURIComponent(selectedEvent.id)}`, {
-            method: 'DELETE',
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            }
-        }).then(() => {
-            selectedEvent = null;
-            eventModal.hide();
-            calendar.refetchEvents();
-            loadUpcomingEvents();
-            hideCalendarNotice();
-        }).catch(error => {
-            showCalendarNotice(error.message);
-        });
-    };
 
     function getCurrentEvents() {
         return calendar.getEvents().filter(event => event.display !== 'none');
@@ -1198,7 +825,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!upcoming.length) {
             container.innerHTML =
-                '<p class="text-muted small">No upcoming events.</p>';
+                '<p class="text-muted small">No upcoming items.</p>';
             return;
         }
 
@@ -1225,7 +852,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         style="background:${categoryColors[category]}"></div>
                     <div>
                         <h4>${escapeHtml(event.title)}</h4>
-                        <p>${date} · ${time}</p>
+                        <p>${event.extendedProps.type === 'task' ? 'Task' : 'Event'} · ${date} · ${time}</p>
                     </div>
                 </div>
             `;
@@ -1240,12 +867,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     async function loadUpcomingEvents() {
-        if (!googleConnected) {
-            upcomingEvents = [];
-            renderUpcoming();
-            return;
-        }
-
         const start = new Date();
         const end = new Date(start);
         end.setDate(end.getDate() + 90);
